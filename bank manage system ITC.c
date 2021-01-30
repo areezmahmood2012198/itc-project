@@ -43,7 +43,6 @@ void new_acc()
 {
     int choice;
     FILE *ptr;
-
     ptr=fopen("record.dat","a+");
     account_no:
     system("cls");
@@ -62,7 +61,7 @@ void new_acc()
             }
     }
     add.acc_no=check.acc_no;
-        printf("\nEnter the name:");
+    printf("\nEnter the name:");
     scanf("%s",add.name);
     printf("\nEnter the date of birth(mm/dd/yyyy):");
     scanf("%d/%d/%d",&add.dob.month,&add.dob.day,&add.dob.year);
@@ -78,10 +77,7 @@ void new_acc()
     scanf("%f",&add.amt);
     printf("\nType of account:\n\t#Saving\n\t#Current\n\t#Fixed1(for 1 year)\n\t#Fixed2(for 2 years)\n\t#Fixed3(for 3 years)\n\n\tEnter your choice:");
     scanf("%s",add.acc_type);
-
-        fprintf(ptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.address,add.citizenship,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
-
-
+    fprintf(ptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.address,add.citizenship,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
     fclose(ptr);
     printf("\nAccount created successfully!");
     add_invalid:
@@ -105,7 +101,6 @@ void view_list()
     int test=0;
     system("cls");
     printf("\nACC. NO.\tNAME\t\t\tADDRESS\t\t\tPHONE\n");
-
     while(fscanf(view,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,add.address,add.citizenship,&add.phone,add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
        {
            printf("\n%6d\t %10s\t\t\t%10s\t\t%.0lf",add.acc_no,add.name,add.address,add.phone);
@@ -137,7 +132,6 @@ void edit(void)
     FILE *old,*newrec;
     old=fopen("record.dat","r");
     newrec=fopen("new.dat","w");
-
     printf("\nEnter the account no. of the customer whose info you want to change:");
     scanf("%d",&upd.acc_no);
     while(fscanf(old,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,add.address,add.citizenship,&add.phone,add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
