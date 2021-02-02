@@ -43,10 +43,20 @@ void new_acc()
 {
     int choice;
     FILE *ptr;
+
     ptr=fopen("record.dat","a+");
     account_no:
     system("cls");
-    printf("\t\t\t==== ADD RECORD  ====");
+    printf("\n###########################################################################");
+    printf("\n############                                                   ############");
+    printf("\n############      Bank management System Project in C          ############");
+    printf("\n############                For 1st Semester                   ############");
+    printf("\n###########################################################################");
+    printf("\n---------------------------------------------------------------------------\n");
+
+    printf("\t\t\t\tADD RECORD");
+    printf("\n----------------------------------------------------------------------------");
+
     printf("\n\n\nEnter today's date(mm/dd/yyyy):");
     scanf("%d/%d/%d",&add.deposit.month,&add.deposit.day,&add.deposit.year);
     printf("\nEnter the account number:");
@@ -61,7 +71,7 @@ void new_acc()
             }
     }
     add.acc_no=check.acc_no;
-    printf("\nEnter the name:");
+        printf("\nEnter the name:");
     scanf("%s",add.name);
     printf("\nEnter the date of birth(mm/dd/yyyy):");
     scanf("%d/%d/%d",&add.dob.month,&add.dob.day,&add.dob.year);
@@ -77,7 +87,10 @@ void new_acc()
     scanf("%f",&add.amt);
     printf("\nType of account:\n\t#Saving\n\t#Current\n\t#Fixed1(for 1 year)\n\t#Fixed2(for 2 years)\n\t#Fixed3(for 3 years)\n\n\tEnter your choice:");
     scanf("%s",add.acc_type);
-    fprintf(ptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.address,add.citizenship,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
+
+        fprintf(ptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.address,add.citizenship,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
+
+
     fclose(ptr);
     printf("\nAccount created successfully!");
     add_invalid:
@@ -100,10 +113,20 @@ void view_list()
     view=fopen("record.dat","r");
     int test=0;
     system("cls");
+    printf("\n###########################################################################");
+    printf("\n############                                                   ############");
+    printf("\n############      Bank management System Project in C          ############");
+    printf("\n############                For 1st Semester                   ############");
+    printf("\n###########################################################################");
+    printf("\n---------------------------------------------------------------------------\n");
+
+    printf("\t\t\t\tCUSTOMER LIST");
+    printf("\n----------------------------------------------------------------------------");
     printf("\nACC. NO.\tNAME\t\t\tADDRESS\t\t\tPHONE\n");
+
     while(fscanf(view,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,add.address,add.citizenship,&add.phone,add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
        {
-           printf("\n%6d\t %10s\t\t\t%10s\t\t%.0lf",add.acc_no,add.name,add.address,add.phone);
+           printf("\n%6d\t   %10s\t\t  %10s\t\t\t%.0lf",add.acc_no,add.name,add.address,add.phone);
            test++;
        }
 
@@ -132,6 +155,15 @@ void edit(void)
     FILE *old,*newrec;
     old=fopen("record.dat","r");
     newrec=fopen("new.dat","w");
+     printf("\n###########################################################################");
+    printf("\n############                                                   ############");
+    printf("\n############      Bank management System Project in C          ############");
+    printf("\n############                For 1st Semester                   ############");
+    printf("\n###########################################################################");
+    printf("\n---------------------------------------------------------------------------\n");
+
+    printf("\t\t\t\tEDIT RECORD");
+    printf("\n----------------------------------------------------------------------------");
     printf("\nEnter the account no. of the customer whose info you want to change:");
     scanf("%d",&upd.acc_no);
     while(fscanf(old,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,add.address,add.citizenship,&add.phone,add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
@@ -140,21 +172,21 @@ void edit(void)
         {   test=1;
             printf("\nWhich information do you want to change?\n1.Address\n2.Phone\n\nEnter your choice(1 for address and 2 for phone):");
             scanf("%d",&choice);
-            system("cls");
+
             if(choice==1)
-                {printf("Enter the new address:");
+                {printf("\nEnter the new address:");
                 scanf("%s",upd.address);
                 fprintf(newrec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,upd.address,add.citizenship,add.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
-                system("cls");
-                printf("Changes saved!");
+
+                printf("\nChanges saved!");
                 }
             else if(choice==2)
                 {
-                    printf("Enter the new phone number:");
+                    printf("\nEnter the new phone number:");
                 scanf("%lf",&upd.phone);
                 fprintf(newrec,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.address,add.citizenship,upd.phone,add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
-                system("cls");
-                printf("Changes saved!");
+
+                printf("\nChanges saved!");
                 }
 
         }
@@ -200,8 +232,16 @@ void transact(void)
     FILE *old,*newrec;
     old=fopen("record.dat","r");
     newrec=fopen("new.dat","w");
+     printf("\n###########################################################################");
+    printf("\n############                                                   ############");
+    printf("\n############      Bank management System Project in C          ############");
+    printf("\n############                For 1st Semester                   ############");
+    printf("\n###########################################################################");
+    printf("\n---------------------------------------------------------------------------\n");
 
-        printf("Enter the account no. of the customer:");
+    printf("\t\t\t\tTRANSACTION");
+    printf("\n----------------------------------------------------------------------------");
+        printf("\nEnter the account no. of the customer:");
     scanf("%d",&transaction.acc_no);
     while (fscanf(old,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,add.address,add.citizenship,&add.phone,add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
    {
@@ -246,6 +286,7 @@ void transact(void)
    fclose(newrec);
    remove("record.dat");
    rename("new.dat","record.dat");
+   if(test!=1)
    {
        printf("\n\nRecord not found!!");
        transact_invalid:
@@ -283,7 +324,16 @@ void erase(void)
     int test=0;
     old=fopen("record.dat","r");
     newrec=fopen("new.dat","w");
-    printf("Enter the account no. of the customer you want to delete:");
+     printf("\n###########################################################################");
+    printf("\n############                                                   ############");
+    printf("\n############      Bank management System Project in C          ############");
+    printf("\n############                For 1st Semester                   ############");
+    printf("\n###########################################################################");
+    printf("\n---------------------------------------------------------------------------\n");
+
+    printf("\t\t\t\tDELETE RECORD");
+    printf("\n----------------------------------------------------------------------------");
+    printf("\nEnter the account no. of the customer you want to delete:");
     scanf("%d",&rem.acc_no);
     while (fscanf(old,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,add.address,add.citizenship,&add.phone,add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
    {
@@ -335,8 +385,16 @@ void see(void)
     float time;
     float intrst;
     ptr=fopen("record.dat","r");
+     printf("\n###########################################################################");
+    printf("\n############                                                   ############");
+    printf("\n############      Bank management System Project in C          ############");
+    printf("\n############                For 1st Semester                   ############");
+    printf("\n###########################################################################");
+    printf("\n---------------------------------------------------------------------------\n");
 
-       printf("Enter the account number whose info you want to know:");
+    printf("\t\t\t\tVIEW RECORD");
+    printf("\n----------------------------------------------------------------------------");
+       printf("\nEnter the account number whose info you want to know:");
         scanf("%d",&check.acc_no);
 
       while (fscanf(ptr,"%d %s %d/%d/%d %d %s %s %lf %s %f %d/%d/%d",&add.acc_no,add.name,&add.dob.month,&add.dob.day,&add.dob.year,&add.age,add.address,add.citizenship,&add.phone,add.acc_type,&add.amt,&add.deposit.month,&add.deposit.day,&add.deposit.year)!=EOF)
@@ -344,7 +402,15 @@ void see(void)
             if(add.acc_no==check.acc_no)
             {   system("cls");
                 test=1;
+                printf("\n###########################################################################");
+                printf("\n############                                                   ############");
+                printf("\n############      Bank management System Project in C          ############");
+                printf("\n############                For 1st Semester                   ############");
+                printf("\n###########################################################################");
+                printf("\n---------------------------------------------------------------------------\n");
 
+                printf("\t\t\t\tACCOUNT DETAIL");
+                printf("\n----------------------------------------------------------------------------");
                 printf("\nAccount NO.:%d\nName:%s \nDOB:%d/%d/%d \nAge:%d \nAddress:%s \nCitizenship No:%s \nPhone number:%.0lf \nType Of Account:%s \nAmount deposited:$ %.2f \nDate Of Deposit:%d/%d/%d\n\n",add.acc_no,add.name,add.dob.month,add.dob.day,add.dob.year,add.age,add.address,add.citizenship,add.phone,
                 add.acc_type,add.amt,add.deposit.month,add.deposit.day,add.deposit.year);
                 if(strcmp(add.acc_type,"fixed1")==0)
@@ -387,6 +453,9 @@ void see(void)
 
             }
         }
+
+
+
 
     fclose(ptr);
      if(test!=1)
@@ -436,9 +505,15 @@ void close(void)
 void menu(void)
 {   int choice;
     system("cls");
-    system("color 5");
-    printf("\n\n\t\t\t       BANKING MANAGEMENT SYSTEM");
-    printf("\n\n\n\t\t\t\xB2\xB2\xB2\xB2\xB2\xB2\xB2 WELCOME TO THE MAIN MENU \xB2\xB2\xB2\xB2\xB2\xB2\xB2");
+    printf("\n###########################################################################");
+    printf("\n############                                                   ############");
+    printf("\n############      Bank management System Project in C          ############");
+    printf("\n############                For 1st Semester                   ############");
+    printf("\n###########################################################################");
+    printf("\n---------------------------------------------------------------------------\n");
+
+    printf("\t\t\t\tMAIN MENU");
+    printf("\n----------------------------------------------------------------------------");
     printf("\n\n\t\t[1] Create a new account\n\t\t[2] Update information of existing account\n\t\t[3] Transaction\n\t\t[4] Check the details of existing account\n\t\t[5] Remove existing account\n\t\t[6] View customer's list\n\t\t[7] Exit\n\n\n\t\t Enter your choice:");
     scanf("%d",&choice);
 
@@ -458,7 +533,7 @@ void menu(void)
         case 6:view_list();
 
         break;
-        case 8:close();
+        case 7:exit(0);
         break;
     }
 
@@ -469,8 +544,17 @@ int main()
 {
     char pass[10],password[10]="pass";
     int i=0;
-    printf("\n\n\n\t\t\t\t   Bank Management System\n\t\t\t\t\t User Login ");
-    printf("\n\n\n\n\n\t\t\t\tEnter the password to login:");
+    printf("\n###########################################################################");
+    printf("\n############                                                   ############");
+    printf("\n############      Bank management System Project in C          ############");
+    printf("\n############                For 1st Semester                   ############");
+    printf("\n###########################################################################");
+    printf("\n---------------------------------------------------------------------------\n");
+
+    printf("\t\t\t\tUSER LOGIN");
+    printf("\n----------------------------------------------------------------------------");
+
+    printf("\n\n\n\n\nEnter the password to login:");
     scanf("%s",pass);
 
     if (strcmp(pass,password)==0)
@@ -511,5 +595,3 @@ int main()
         }
         return 0;
 }
-
-
